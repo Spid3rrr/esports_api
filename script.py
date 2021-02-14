@@ -19,7 +19,7 @@ def getdata():
     options = Options()
     options.headless = True
     options.add_argument("--window-size=1920,1200")
-    DRIVER_PATH = 'C://Users//Spid3r//AppData//Local//Programs//Python//Python39//chromedriver.exe'
+    DRIVER_PATH = ''
     driver = webdriver.Chrome(options=options, executable_path=DRIVER_PATH)
     driver.get("https://lolesports.com/schedule?leagues=lec")
 
