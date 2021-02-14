@@ -1,26 +1,27 @@
 import time
 import requests
+import os
 from bs4 import BeautifulSoup
 
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
-#our function for counting from 0-20
-def counting():
-    for i in range(0,21):
-        if i==20:
-            print("counting at: "+str(i))
-            print("Done counting...")
-        else:
-            print("counting at: "+str(i))
-            time.sleep(5) #sleep for 5 seconds
 
 def getdata():
-    options = Options()
-    options.headless = True
-    options.add_argument("--window-size=1920,1200")
-    driver = webdriver.Chrome(options=options)
+
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     driver.get("https://lolesports.com/schedule?leagues=lec")
+
+
+
+
+
+
 
     html = driver.page_source
 
