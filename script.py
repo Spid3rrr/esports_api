@@ -1,5 +1,9 @@
 import time
+import requests
+from bs4 import BeautifulSoup
 
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 
 #our function for counting from 0-20
 def counting():
@@ -11,6 +15,29 @@ def counting():
             print("counting at: "+str(i))
             time.sleep(5) #sleep for 5 seconds
 
+def getdata():
+    options = Options()
+    options.headless = True
+    options.add_argument("--window-size=1920,1200")
+    DRIVER_PATH = 'C://Users//Spid3r//AppData//Local//Programs//Python//Python39//chromedriver.exe'
+    driver = webdriver.Chrome(options=options, executable_path=DRIVER_PATH)
+    driver.get("https://lolesports.com/schedule?leagues=lec")
+
+    html = driver.page_source
+
+    soup = BeautifulSoup(html,features="html.parser")
+    results = soup.find_all('div', class_ = 'team team1')
+
+    print('result : \n')
+    for result in results:
+        teamname = result.find('span',class_='name')
+        if teamname is None:
+            continue
+        print(teamname.text.strip())
+        print()
+
+
+    driver.quit()
 #our main function
 if __name__ == '__main__':
-    counting() #call our counting method
+    getdata() #call our counting method
