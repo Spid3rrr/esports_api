@@ -34,14 +34,13 @@ def getdata():
 
 
 #our main function
-app = Flask(__name__)
-api = Api(app)
 class teams(Resource):
     #methods go here
     def get(self):
-        return {'test value':' noice '},200
-    pass
-
+        return "yeet response",200
+app = Flask(__name__)
+api = Api(app)
 api.add_resource(teams,'/teams')
+
 if __name__ == '__main__':
     getdata() #get data
