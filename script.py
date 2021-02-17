@@ -31,16 +31,13 @@ def getdata():
         print()
     driver.quit()
 
-
-
+# welcome msg
+@app.route('/')
+def index():
+    return "Welcome to our server !!"
 #our main function
-class teams(Resource):
-    #methods go here
-    def get(self):
-        return "yeet response",200
 app = Flask(__name__)
 api = Api(app)
-api.add_resource(teams,'/teams')
-
+app.run(threaded=True, port=5000)
 if __name__ == '__main__':
     getdata() #get data
